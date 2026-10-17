@@ -54,10 +54,6 @@ curl -X POST http://127.0.0.1:8787/event -d '{"id":"meu-agente","name":"Codex","
 - A página reconecta sozinha se o servidor reiniciar.
 - Limite conhecido: hooks assíncronos podem chegar fora de ordem em ferramentas muito rápidas; o próximo evento corrige o estado.
 
-## Custo: R$ 0
-
-Tudo local, Node sem dependências (`http` + SSE), Canvas 2D puro sem build, sprites desenhados por código, estado em memória. A demo pública é só `web/` em hospedagem estática gratuita (GitHub Pages).
-
 ## Personalizar e desenvolver
 
 - **Mapa:** é o texto de `web/map.js` (uma letra por tile); o canvas e a escala se ajustam sozinhos. `npm run check` valida (linhas do mesmo tamanho, nada isolado, vagas alcançáveis) e testa pinguins, ponte de eventos e instalador.
