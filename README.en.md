@@ -11,7 +11,7 @@ An island in your browser where **every AI agent becomes a penguin**. Open Claud
 | **Idle** (turn finished) | wanders around the island |
 | **Done** (session or subagent ended) | walks to the sea and leaves |
 
-Each session shows up under its project folder name and each subagent gets its own penguin. Click a penguin to see the tool and details.
+Each session shows up under its project folder name and each subagent gets its own penguin. Click a penguin to see the tool and details. The light follows your computer's clock (day, dusk and night, with lamps and windows lit up) and there are optional sounds, off by default; the buttons in the corner switch the time of day and turn the sound on.
 
 **Demo (fake agents):** https://dududisk.github.io/clubo-dos-pinguins/
 
@@ -48,4 +48,4 @@ curl -X POST http://127.0.0.1:8787/event -d '{"id":"my-agent","name":"Codex","st
 
 ## Notice
 
-Inspired by the look of Club Penguin's town. **Independent project, not affiliated with Disney**: all art is original and no game assets, logos or maps are included. [MIT](https://github.com/dududisk/clubo-dos-pinguins/blob/main/LICENSE) license.
+Inspired by the look of Club Penguin's town. **Independent project, not affiliated with Disney**: all art is original and no game assets, logos or maps are included. Font: Pixelify Sans (SIL OFL 1.1, in `web/fonts/OFL.txt`). [MIT](https://github.com/dududisk/clubo-dos-pinguins/blob/main/LICENSE) license.

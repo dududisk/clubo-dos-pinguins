@@ -11,7 +11,7 @@ Uma ilha no navegador onde **cada agente de IA vira um pinguim**. Abra o Claude 
 | **Ocioso** (terminou o turno) | passeia pela ilha |
 | **Terminou** (sessão ou subagente acabou) | caminha até o mar e vai embora |
 
-Cada sessão aparece com o nome da pasta do projeto e cada subagente vira um pinguim próprio. Clique num pinguim para ver a ferramenta e o detalhe.
+Cada sessão aparece com o nome da pasta do projeto e cada subagente vira um pinguim próprio. Clique num pinguim para ver a ferramenta e o detalhe. A luz segue a hora do seu computador (de dia, fim de tarde e noite, com postes e janelas acesas) e há sons opcionais, desligados por padrão; os botões no canto da tela trocam a hora e ligam o som.
 
 **Demo (agentes fictícios):** https://dududisk.github.io/clubo-dos-pinguins/
 
@@ -48,4 +48,4 @@ curl -X POST http://127.0.0.1:8787/event -d '{"id":"meu-agente","name":"Codex","
 
 ## Aviso
 
-Inspirado no visual da praça do Club Penguin. **Projeto independente, sem relação com a Disney**: toda a arte é original e não há nenhum asset, logo ou mapa do jogo no repositório. Licença [MIT](https://github.com/dududisk/clubo-dos-pinguins/blob/main/LICENSE).
+Inspirado no visual da praça do Club Penguin. **Projeto independente, sem relação com a Disney**: toda a arte é original e não há nenhum asset, logo ou mapa do jogo no repositório. Fonte: Pixelify Sans (SIL OFL 1.1, em `web/fonts/OFL.txt`). Licença [MIT](https://github.com/dududisk/clubo-dos-pinguins/blob/main/LICENSE).

@@ -1,6 +1,6 @@
 // Lógica da praça (sem DOM, sem rede): pinguins, vagas, caminhos e estados.
 // Entrada externa única: setState(id, nome, 'idle'|'thinking'|'working'|'gone', ferramenta?, detalhe?).
-import { MAP, SPAWN, walkable } from './map.js';
+import { MAP, ENTRY, walkable } from './map.js';
 
 const MOVE = 0.25; // segundos por tile
 const MAX = 12; // pinguins na praça; os que passam disso entram quando alguém sair
@@ -24,8 +24,8 @@ export function setState(id, name, state, tool = '', detail = '') {
   if (state === 'gone') { if (p) { release(p); p.leaving = true; } return; } // vai embora a pé até o mar
   if (!p) {
     if (penguins.size >= MAX) return;
-    const color = COLORS[[...id].reduce((a, c) => a + c.charCodeAt(0), 0) % COLORS.length];
-    p = { id, name: id, color, x: SPAWN.x, y: SPAWN.y, nx: SPAWN.x, ny: SPAWN.y, t: 1, path: [], slot: null, sitting: false, wait: 0, retry: 0, want: 'idle', changed: clock, leaving: false, tool: '', detail: '', seen: 0 };
+    const seed = [...id].reduce((a, c) => a + c.charCodeAt(0), 0), color = COLORS[seed % COLORS.length];
+    p = { id, name: id, color, seed, dir: 's', x: ENTRY.x, y: ENTRY.y, nx: ENTRY.x, ny: ENTRY.y, t: 1, path: [], slot: null, sitting: false, wait: 0, retry: 0, want: 'idle', changed: clock, leaving: false, tool: '', detail: '', seen: 0 };
     penguins.set(id, p);
   }
   if (p.leaving) { p.leaving = false; p.path = []; } // voltou antes de sumir
@@ -46,7 +46,10 @@ function release(p) {
   p.slot = null; p.path = []; p.sitting = false;
 }
 
-function go(p, nx, ny) { p.nx = nx; p.ny = ny; p.t = 0; }
+function go(p, nx, ny) { // dir: para onde o pinguim olha (n/s/e/w), usado pelo desenho
+  p.dir = nx > p.x ? 'e' : nx < p.x ? 'w' : ny < p.y ? 'n' : 's';
+  p.nx = nx; p.ny = ny; p.t = 0;
+}
 
 function tick(p, dt) {
   if (p.t < 1) { // no meio de um passo

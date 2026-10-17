@@ -12,6 +12,7 @@ npm run check        # mapa, pinguins, ponte de eventos e instalador de hooks
 
 - `http://127.0.0.1:8787/?debug` abre pinguins falsos com botões para trocar o estado.
 - `http://127.0.0.1:8787/?demo` roda a demo sem servidor de eventos.
+- `?hora=22` (qualquer hora de 0 a 24) força a luz do dia/noite, útil para testar a arte em cada horário.
 
 ## O que é bem-vindo
 

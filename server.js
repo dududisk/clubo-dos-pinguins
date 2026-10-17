@@ -7,7 +7,7 @@ import { PORT } from './install.js';
 const MAX_BODY = 16 << 20; // PostToolUse carrega a resposta inteira da ferramenta: pode ser grande
 const ROOT = join(import.meta.dirname, 'web');
 const HOSTS = new Set([`127.0.0.1:${PORT}`, `localhost:${PORT}`]); // recusa outros Host (DNS rebinding)
-const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.ttf': 'font/ttf' };
 const clients = new Set();
 const send = (res, msg) => res.write(`data: ${JSON.stringify(msg)}\n\n`);
 const broadcast = (list) => list.forEach((m) => clients.forEach((c) => send(c, m)));

@@ -4,31 +4,83 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Clubo dos penguins</title>
 <style>
-  html, body { margin: 0; height: 100%; background: #0f1722; overflow: hidden; font: 12px system-ui, sans-serif; }
+  @font-face { font-family: 'Pixelify Sans'; src: url(fonts/PixelifySans.ttf) format('truetype'); font-weight: 400 700; font-display: swap; }
+  :root {
+    --ink: #14233b; --snow: #f4fbff; --muted: #9db4cf; --amber: #ffcf5a; --lilac: #a9a8ff; --mint: #7fe3c1;
+    --pixel: 'Pixelify Sans', ui-monospace, 'Cascadia Mono', Menlo, monospace;
+  }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #1e6aa0; color: var(--snow); font: 14px/1.3 var(--pixel); }
   body { display: flex; align-items: center; justify-content: center; }
   #stage { position: relative; }
   canvas { display: block; image-rendering: pixelated; cursor: pointer; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  /* Painéis no estilo da arte: borda de 2px, cantos retos e sombra dura, sem desfoque. */
+  .panel, #chips li, #tools button, .name { background: var(--ink); border: 2px solid var(--snow); box-shadow: 2px 2px 0 rgba(20, 35, 59, .6); }
+
+  #hud { position: fixed; top: 12px; left: 12px; right: 12px; display: grid; justify-items: start; gap: 8px; pointer-events: none; }
+  #hud > * { pointer-events: auto; }
+  #hud h1 { margin: 0; font-size: 24px; font-weight: 500; letter-spacing: .5px; text-shadow: 2px 2px 0 var(--ink); }
+  #chips, #tools { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  #chips li { display: flex; align-items: center; gap: 6px; padding: 2px 8px; }
+  #chips i { width: 10px; height: 10px; background: var(--c); box-shadow: 0 0 0 2px var(--ink), 0 0 0 3px var(--c); }
+  #chips li[data-s=working] { --c: var(--amber); } #chips li[data-s=thinking] { --c: var(--lilac); } #chips li[data-s=idle] { --c: var(--mint); }
+  #chips b { min-width: 1ch; text-align: right; }
+  #tools button { padding: 2px 8px; cursor: pointer; }
+  #tools button:hover { background: #1d3254; }
+  #tools button:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 rgba(20, 35, 59, .6); }
+
   #labels { position: absolute; inset: 0; pointer-events: none; }
-  .tag { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; align-items: center; gap: 2px;
-    white-space: nowrap; font-weight: 600; font-size: 11px; will-change: transform; }
-  .name { display: flex; align-items: center; gap: 4px; max-width: 120px; padding: 1px 6px; border-radius: 8px;
-    background: rgba(15, 23, 34, .8); color: #fff; }
+  .tag { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; white-space: nowrap; will-change: transform; }
+  .name { display: flex; align-items: center; gap: 5px; max-width: 130px; padding: 1px 6px; font-size: 12px; cursor: pointer; pointer-events: auto; border-width: 1px; }
   .name span { overflow: hidden; text-overflow: ellipsis; }
-  .name i { flex: none; width: 7px; height: 7px; border-radius: 50%; }
-  .bubble { max-width: 140px; overflow: hidden; text-overflow: ellipsis; padding: 1px 7px; border-radius: 8px; background: #fff; color: #17212b; border: 1px solid #17212b; }
-  .tag.sel .name { outline: 2px solid #ffd54a; }
-  #status, #card, #panel { position: fixed; padding: 8px; border-radius: 6px; background: rgba(15, 23, 34, .85); color: #dfe8f0; }
-  #status { top: 8px; right: 8px; }
-  #card { left: 8px; bottom: 8px; max-width: 360px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
-  #card::first-line { font-weight: 700; font-size: 14px; }
-  #panel { left: 8px; top: 8px; max-height: calc(100% - 16px); overflow: auto; }
+  .name i { flex: none; width: 7px; height: 7px; box-shadow: 0 0 0 1px var(--snow); }
+  .bubble { position: relative; max-width: 150px; overflow: visible; padding: 1px 7px; font-size: 12px; background: var(--snow); color: var(--ink); border: 2px solid var(--ink); box-shadow: 2px 2px 0 rgba(20, 35, 59, .35); }
+  .bubble::after { content: ''; position: absolute; left: 50%; bottom: -6px; width: 6px; height: 6px; background: var(--snow); border: solid var(--ink); border-width: 0 2px 2px 0; transform: translateX(-50%) rotate(45deg); }
+  .small .name { font-size: 10px; max-width: 80px; } .small .bubble { display: none; } .small .tag.sel .bubble { display: block; }
+  .tag.sel .name { outline: 2px solid var(--amber); outline-offset: 1px; }
+
+  #status { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); width: max-content; max-width: calc(100% - 24px); padding: 6px 12px; text-align: center; }
+  #card { position: fixed; left: 12px; bottom: 12px; display: flex; gap: 12px; align-items: flex-start; width: min(340px, calc(100% - 24px)); padding: 10px 12px; box-sizing: border-box; }
+  #face { flex: none; width: 64px; height: 64px; image-rendering: pixelated; background: #eaf5fc; border: 2px solid var(--snow); }
+  #card h2 { margin: 0 0 2px; font-size: 18px; overflow-wrap: anywhere; }
+  #c-state { margin: 0 0 6px; color: var(--amber); }
+  #c-state[data-s=thinking] { color: var(--lilac); } #c-state[data-s=idle] { color: var(--mint); }
+  #card dl { margin: 0; display: grid; gap: 4px; }
+  #card dl div { display: grid; grid-template-columns: 6.5em 1fr; gap: 6px; }
+  #card dt { color: var(--muted); } #card dd { margin: 0; overflow-wrap: anywhere; }
+  [hidden] { display: none !important; }
+
+  #panel { position: fixed; right: 12px; top: 12px; max-height: calc(100% - 24px); overflow: auto; padding: 8px; }
   #panel div { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
   #panel b { min-width: 42px; }
-  #panel button { font: inherit; padding: 2px 6px; cursor: pointer; }
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  #panel button { padding: 2px 6px; cursor: pointer; background: var(--ink); border: 1px solid var(--snow); }
+  .dot { width: 10px; height: 10px; }
+  @media (max-width: 560px) { #hud h1 { font-size: 17px; } #chips li { padding: 1px 6px; } }
 </style>
-<div id="stage"><canvas id="c"></canvas><div id="labels"></div></div>
-<div id="status" hidden></div>
-<div id="card" hidden></div>
-<div id="panel"></div>
+<div id="stage"><canvas id="c" aria-label="Ilha com os agentes de IA como pinguins"></canvas><div id="labels"></div></div>
+<header id="hud">
+  <h1>Clubo dos penguins</h1>
+  <ul id="chips" class="live" aria-live="polite">
+    <li data-s="working"><i></i><b>0</b><span>trabalhando</span></li>
+    <li data-s="thinking"><i></i><b>0</b><span>pensando</span></li>
+    <li data-s="idle"><i></i><b>0</b><span>ociosos</span></li>
+  </ul>
+  <div id="tools"><button id="btn-hora" type="button">Hora: auto</button><button id="btn-som" type="button">Som: desligado</button></div>
+</header>
+<div id="status" class="panel" hidden></div>
+<aside id="card" class="panel" hidden>
+  <canvas id="face" width="16" height="16"></canvas>
+  <div>
+    <h2 id="c-name"></h2>
+    <p id="c-state"></p>
+    <dl>
+      <div><dt>Ferramenta</dt><dd id="c-tool"></dd></div>
+      <div><dt>Detalhe</dt><dd id="c-detail"></dd></div>
+      <div><dt>Último sinal</dt><dd id="c-seen"></dd></div>
+    </dl>
+  </div>
+</aside>
+<div id="panel" class="panel"></div>
 <script type="module" src="main.js"></script>

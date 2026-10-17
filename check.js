@@ -1,6 +1,6 @@
 // Auto-teste do mapa: `npm run check`. Rode depois de editar web/map.js.
 import assert from 'node:assert/strict';
-import { MAP, SPAWN, walkable } from './web/map.js';
+import { MAP, SPAWN, ENTRY, walkable } from './web/map.js';
 import { penguins, slots, setState, update } from './web/town.js';
 import { apply, sweep, state as bridge } from './bridge.js';
 import { CMD, EVENTS, PORT, hasHooks, withHooks } from './install.js';
@@ -19,6 +19,7 @@ MAP.forEach((row, y) => [...row].forEach((ch, x) => {
   if (walkable(x, y)) assert(seen.has(`${x},${y}`), `tile andável isolado em ${x},${y}`);
   if ('bc'.includes(ch)) assert(D.some(([dx, dy]) => seen.has(`${x + dx},${y + dy}`)), `vaga '${ch}' inalcançável em ${x},${y}`);
 }));
+assert(MAP[ENTRY.y][ENTRY.x] === '~' && D.some(([dx, dy]) => seen.has(`${ENTRY.x + dx},${ENTRY.y + dy}`)), 'ENTRY deve ser mar encostado em terra alcançável');
 console.log(`ok: mapa ${w}x${MAP.length}, ${seen.size} tiles andáveis alcançáveis`);
 
 // Estados + vagas: simula alguns segundos de praça (dt=0.05).
