@@ -1,6 +1,6 @@
-# 🐧 Clubo dos penguins ("Penguin Club")
+# 🐧 Clubo dos penguins
 
-English · [Português](README.md)
+English · [Português](https://github.com/dududisk/clubo-dos-pinguins/blob/main/README.md)
 
 An island in your browser where **every AI agent becomes a penguin**. Open Claude Code and a penguin is born in the plaza:
 
@@ -11,9 +11,9 @@ An island in your browser where **every AI agent becomes a penguin**. Open Claud
 | **Idle** (turn finished) | wanders around the island |
 | **Done** (session or subagent ended) | walks to the sea and leaves |
 
-Each session shows up under its project folder name; each subagent (`Explore`, `Plan`...) gets its own penguin. Click a penguin to see state, tool, command/file and last signal.
+Each session shows up under its project folder name and each subagent gets its own penguin. Click a penguin to see the tool and details.
 
-> Demo (fake agents, nothing to install): `https://dududisk.github.io/clubo-dos-pinguins/`, also at `http://127.0.0.1:8787/?demo`.
+**Demo (fake agents):** https://dududisk.github.io/clubo-dos-pinguins/
 
 ## Quick start
 
@@ -23,36 +23,29 @@ Needs **Node 20.11+** and `curl`.
 npx clubo-dos-pinguins
 ```
 
-On first run it shows what it would change in your `~/.claude/settings.json` (it only **adds** hooks, with a backup at `settings.json.bak-pinguins`) and asks before installing. Then open **http://127.0.0.1:8787** and start a Claude Code session (already-open sessions only pick up the hooks after a restart).
+On first run it shows what it would change in your `~/.claude/settings.json` (it only **adds** hooks, with a backup at `settings.json.bak-pinguins`) and asks before installing. Then open **http://127.0.0.1:8787** and start a Claude Code session (already-open sessions must be restarted).
 
-From source: `git clone https://github.com/dududisk/clubo-dos-pinguins.git && cd clubo-dos-pinguins && npm start`.
-Hooks by hand: `npx clubo-dos-pinguins hooks` (preview) · `--yes` (apply) · `--remove` (undo) · optional file argument, e.g. `.claude/settings.local.json` for one project only.
+- Undo: `npx clubo-dos-pinguins hooks --remove --yes`
+- From source: `git clone https://github.com/dududisk/clubo-dos-pinguins.git && cd clubo-dos-pinguins && npm start`
 
-## Privacy and security
+## Privacy
 
-- Everything runs **on your machine**: the server listens on `127.0.0.1` only, rejects odd `Origin`/`Host` headers and keeps state in memory. Nothing leaves your computer.
-- The bubble shows only the tool name; the command/file (`detail`) is shown only when you click a penguin.
+- Everything runs on your machine (`127.0.0.1`); nothing is sent out and state is kept in memory only.
+- The command or file an agent is using is shown only when you click its penguin; be careful when sharing your screen.
 - Hooks are async and silent: they never slow Claude down and never error if the server is off.
-- Agent-provided text is always rendered as text, never HTML.
 
 ## Other AI tools
 
-Anything that can `POST` can show up in the plaza:
+Anything that can `POST` shows up in the plaza (`state`: `idle`, `thinking`, `working` or `gone`; `tool` and `detail` are optional):
 
 ```bash
-curl -X POST http://127.0.0.1:8787/event -d '{"id":"my-agent","name":"Codex","state":"working","tool":"Bash","detail":"npm test"}'
+curl -X POST http://127.0.0.1:8787/event -d '{"id":"my-agent","name":"Codex","state":"working","tool":"Bash"}'
 ```
 
-`state`: `idle` | `thinking` | `working` | `gone`; `tool` and `detail` are optional. Claude Code hook payloads are understood too (see `bridge.js`).
+## Contributing
 
-## Notes
+`npm run check` runs the tests. See [CONTRIBUTING.md](https://github.com/dududisk/clubo-dos-pinguins/blob/main/CONTRIBUTING.md) (Portuguese).
 
-- Workers stay at the desk ~10 s after stopping, because the state flips between consecutive tool calls.
-- 4 desks and 4 benches; whoever finds no free seat keeps wandering. Max 12 penguins; agents silent for 30 min are removed.
-- Known limit: async hooks can arrive out of order for very fast tools; the next event fixes the state.
-- Cost: $0. Local only, zero dependencies, no build, art drawn in code.
-- Develop: `npm run check`; map = text in `web/map.js`; see [CONTRIBUTING.md](CONTRIBUTING.md) (Portuguese).
+## Notice
 
-## Credits
-
-Inspired by the look of Club Penguin's town. **Independent project, not affiliated with Disney.** All art is original and drawn in code; no game assets, logos or maps are included. [MIT](LICENSE).
+Inspired by the look of Club Penguin's town. **Independent project, not affiliated with Disney**: all art is original and no game assets, logos or maps are included. [MIT](https://github.com/dududisk/clubo-dos-pinguins/blob/main/LICENSE) license.

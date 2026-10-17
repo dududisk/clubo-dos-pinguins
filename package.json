@@ -35,6 +35,7 @@
   "scripts": {
     "start": "node cli.js",
     "check": "node check.js",
+    "prepublishOnly": "npm run check",
     "hooks": "node cli.js hooks"
   }
 }
