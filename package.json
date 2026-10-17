@@ -1,5 +1,5 @@
 {
-  "name": "clube-dos-pinguins",
+  "name": "clubo-dos-pinguins",
   "version": "0.1.0",
   "description": "Uma praça de pinguins no navegador onde cada agente de IA (Claude Code) vira um pinguim: trabalha na mesa, pensa lendo num banco.",
   "license": "MIT",
@@ -13,7 +13,7 @@
   },
   "type": "module",
   "bin": {
-    "clube-dos-pinguins": "cli.js"
+    "clubo-dos-pinguins": "cli.js"
   },
   "files": [
     "cli.js",

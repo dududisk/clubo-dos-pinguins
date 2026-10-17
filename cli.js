@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// clube-dos-pinguins                       sobe a praça (e oferece instalar os hooks se ainda não estiverem)
-// clube-dos-pinguins hooks [--yes] [--remove] [arquivo]
+// clubo-dos-pinguins                       sobe a praça (e oferece instalar os hooks se ainda não estiverem)
+// clubo-dos-pinguins hooks [--yes] [--remove] [arquivo]
 //     sem --yes só MOSTRA o que mudaria; com --yes grava (cópia em <arquivo>.bak-pinguins).
 //     arquivo padrão: ~/.claude/settings.json (vale para todos os projetos).
 import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -32,7 +32,7 @@ async function main() {
       return yes;
     });
   }
-  if (args.some((a) => a === '-h' || a === '--help')) return console.log(`Uso:\n  clube-dos-pinguins [--no-hooks]\n  clube-dos-pinguins hooks [--yes] [--remove] [arquivo]\n\nA praça abre em http://127.0.0.1:${PORT}`);
+  if (args.some((a) => a === '-h' || a === '--help')) return console.log(`Uso:\n  clubo-dos-pinguins [--no-hooks]\n  clubo-dos-pinguins hooks [--yes] [--remove] [arquivo]\n\nA praça abre em http://127.0.0.1:${PORT}`);
 
   // Sem os hooks nenhum agente aparece: oferece instalar (só em terminal interativo, e só se ainda não estiverem).
   if (!args.includes('--no-hooks') && process.stdin.isTTY && !hasHooks(JSON.parse(read(SETTINGS)))) {

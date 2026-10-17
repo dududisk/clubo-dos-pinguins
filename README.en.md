@@ -20,13 +20,13 @@ Each session shows up under its project folder name; each subagent (`Explore`, `
 Needs **Node 20.11+** and `curl`.
 
 ```bash
-npx clube-dos-pinguins
+npx clubo-dos-pinguins
 ```
 
 On first run it shows what it would change in your `~/.claude/settings.json` (it only **adds** hooks, with a backup at `settings.json.bak-pinguins`) and asks before installing. Then open **http://127.0.0.1:8787** and start a Claude Code session (already-open sessions only pick up the hooks after a restart).
 
 From source: `git clone https://github.com/dududisk/clubo-dos-pinguins.git && cd clubo-dos-pinguins && npm start`.
-Hooks by hand: `npx clube-dos-pinguins hooks` (preview) · `--yes` (apply) · `--remove` (undo) · optional file argument, e.g. `.claude/settings.local.json` for one project only.
+Hooks by hand: `npx clubo-dos-pinguins hooks` (preview) · `--yes` (apply) · `--remove` (undo) · optional file argument, e.g. `.claude/settings.local.json` for one project only.
 
 ## Privacy and security
 

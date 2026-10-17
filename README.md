@@ -20,14 +20,14 @@ Cada sessão aparece com o nome da pasta do projeto, e cada subagente (`Explore`
 Precisa de **Node 20.11+** e `curl` (já vêm no Windows 11, macOS e Linux; no Windows o Claude Code usa Git Bash).
 
 ```bash
-npx clube-dos-pinguins
+npx clubo-dos-pinguins
 ```
 
 Na primeira vez ele mostra o que mudaria no seu `~/.claude/settings.json` (só **adiciona** hooks, com cópia de segurança em `settings.json.bak-pinguins`) e pergunta se pode instalar. Depois abra **http://127.0.0.1:8787** e inicie uma sessão do Claude Code (sessões já abertas só passam a usar os hooks depois de reiniciadas).
 
 Sem o npm, a partir do código: `git clone https://github.com/dududisk/clubo-dos-pinguins.git && cd clubo-dos-pinguins && npm start`.
 
-Hooks manualmente: `npx clube-dos-pinguins hooks` mostra o que mudaria · `--yes` aplica · `--remove` desfaz · aceita outro arquivo, por exemplo `.claude/settings.local.json` para valer só num projeto.
+Hooks manualmente: `npx clubo-dos-pinguins hooks` mostra o que mudaria · `--yes` aplica · `--remove` desfaz · aceita outro arquivo, por exemplo `.claude/settings.local.json` para valer só num projeto.
 
 ## Privacidade e segurança
 
