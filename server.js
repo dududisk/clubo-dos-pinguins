@@ -47,6 +47,6 @@ createServer(async (req, res) => {
     if (!res.headersSent) res.writeHead(404).end();
   }
 }).on('error', (e) => {
-  console.error(e.code === 'EADDRINUSE' ? `A porta ${PORT} já está em uso: já existe um Clube dos Pinguins rodando? Abra http://127.0.0.1:${PORT}` : e.message);
+  console.error(e.code === 'EADDRINUSE' ? `A porta ${PORT} já está em uso: já existe um Clubo dos penguins rodando? Abra http://127.0.0.1:${PORT}` : e.message);
   process.exit(1);
-}).listen(PORT, '127.0.0.1', () => console.log(`Clube dos Pinguins em http://127.0.0.1:${PORT}`));
+}).listen(PORT, '127.0.0.1', () => console.log(`Clubo dos penguins em http://127.0.0.1:${PORT}`));

@@ -1,4 +1,4 @@
-# 🐧 Clube dos Pinguins
+# 🐧 Clubo dos penguins
 
 [English](README.en.md) · Português
 

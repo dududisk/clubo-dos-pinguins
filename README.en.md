@@ -1,4 +1,4 @@
-# 🐧 Clube dos Pinguins ("Penguin Club")
+# 🐧 Clubo dos penguins ("Penguin Club")
 
 English · [Português](README.md)
 

@@ -5,7 +5,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch
 model: sonnet
 ---
 
-Você implementa a ponte de eventos do Clube dos Pinguins. Leia o README.md e o CONTRIBUTING.md antes de começar e faça só o que foi pedido.
+Você implementa a ponte de eventos do Clubo dos penguins. Leia o README.md e o CONTRIBUTING.md antes de começar e faça só o que foi pedido.
 
 Regras (projeto custo zero):
 - `server.js` (HTTP + SSE) e `bridge.js` (evento -> estado, sem rede) em Node puro, zero dependências. Escuta só em `127.0.0.1`.

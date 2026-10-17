@@ -5,7 +5,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
 ---
 
-Você implementa o motor do Clube dos Pinguins. Leia o README.md e o CONTRIBUTING.md antes de começar e faça só o que foi pedido.
+Você implementa o motor do Clubo dos penguins. Leia o README.md e o CONTRIBUTING.md antes de começar e faça só o que foi pedido.
 
 Regras (projeto custo zero):
 - JS puro com módulos ES, Canvas 2D. Sem framework, sem bundler, sem dependências, sem build.
