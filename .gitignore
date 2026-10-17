@@ -1,0 +1,5 @@
+node_modules/
+*.bak-pinguins
+.claude/settings.local.json
+# Imagem de referência com arte da Disney (só serviu de silhueta para o mapa): não publicar.
+assets/

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clube dos Pinguins</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0f1722; overflow: hidden; font: 12px system-ui, sans-serif; }
+  body { display: flex; align-items: center; justify-content: center; }
+  #stage { position: relative; }
+  canvas { display: block; image-rendering: pixelated; cursor: pointer; }
+  #labels { position: absolute; inset: 0; pointer-events: none; }
+  .tag { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    white-space: nowrap; font-weight: 600; font-size: 11px; will-change: transform; }
+  .name { display: flex; align-items: center; gap: 4px; max-width: 120px; padding: 1px 6px; border-radius: 8px;
+    background: rgba(15, 23, 34, .8); color: #fff; }
+  .name span { overflow: hidden; text-overflow: ellipsis; }
+  .name i { flex: none; width: 7px; height: 7px; border-radius: 50%; }
+  .bubble { max-width: 140px; overflow: hidden; text-overflow: ellipsis; padding: 1px 7px; border-radius: 8px; background: #fff; color: #17212b; border: 1px solid #17212b; }
+  .tag.sel .name { outline: 2px solid #ffd54a; }
+  #status, #card, #panel { position: fixed; padding: 8px; border-radius: 6px; background: rgba(15, 23, 34, .85); color: #dfe8f0; }
+  #status { top: 8px; right: 8px; }
+  #card { left: 8px; bottom: 8px; max-width: 360px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
+  #card::first-line { font-weight: 700; font-size: 14px; }
+  #panel { left: 8px; top: 8px; max-height: calc(100% - 16px); overflow: auto; }
+  #panel div { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+  #panel b { min-width: 42px; }
+  #panel button { font: inherit; padding: 2px 6px; cursor: pointer; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+</style>
+<div id="stage"><canvas id="c"></canvas><div id="labels"></div></div>
+<div id="status" hidden></div>
+<div id="card" hidden></div>
+<div id="panel"></div>
+<script type="module" src="main.js"></script>

@@ -1,0 +1,40 @@
+{
+  "name": "clube-dos-pinguins",
+  "version": "0.1.0",
+  "description": "Uma praça de pinguins no navegador onde cada agente de IA (Claude Code) vira um pinguim: trabalha na mesa, pensa lendo num banco.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dududisk/clubo-dos-pinguins.git"
+  },
+  "homepage": "https://github.com/dududisk/clubo-dos-pinguins#readme",
+  "bugs": {
+    "url": "https://github.com/dududisk/clubo-dos-pinguins/issues"
+  },
+  "type": "module",
+  "bin": {
+    "clube-dos-pinguins": "cli.js"
+  },
+  "files": [
+    "cli.js",
+    "install.js",
+    "server.js",
+    "bridge.js",
+    "web"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "keywords": [
+    "claude-code",
+    "hooks",
+    "ai-agents",
+    "visualization",
+    "pixel-art"
+  ],
+  "scripts": {
+    "start": "node cli.js",
+    "check": "node check.js",
+    "hooks": "node cli.js hooks"
+  }
+}
